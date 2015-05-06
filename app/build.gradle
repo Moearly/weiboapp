@@ -21,7 +21,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
     compile files('libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar')
     compile files('libs/weibosdkcore_v3.0.1.jar')
+    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile project(':weiboSDK')
 }

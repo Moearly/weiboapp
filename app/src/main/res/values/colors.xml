@@ -2,4 +2,10 @@
 <resources>
     <color name="white">#ffffff</color>
     <color name="lighter_gray">#696969</color>
+    <color name="login_name">#ff484848</color>
+    <color name="main_content_text_color">#ff333333</color>
+    <color name="empty_view_text_color">#ffbdbdbd</color>
+    <color name="login_input_bg_color">#00000000</color>
+    <color name="main_button_disabled_text_color_for_light_color_button">#4cffffff</color>
+    <color name="main_link_text_color">#ff507daf</color>
 </resources>

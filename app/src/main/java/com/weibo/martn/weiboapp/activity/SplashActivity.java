@@ -38,6 +38,7 @@ public class SplashActivity extends Activity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.ac_splash);
         initFontType();
         new CountDownTimer(1000, 1000) {
             @Override
