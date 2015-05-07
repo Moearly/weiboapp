@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.provider.SyncStateContract;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;

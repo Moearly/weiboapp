@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="login_icon_padding_top">56.0dip</dimen>
     <dimen name="login_button">44.0dip</dimen>
+    <dimen name="shadow_width">15.0dip</dimen>
+    <dimen name="slidingmenu_offset">100.0dip</dimen>
 </resources>

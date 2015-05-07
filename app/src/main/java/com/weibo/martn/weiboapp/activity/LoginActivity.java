@@ -1,16 +1,28 @@
 package com.weibo.martn.weiboapp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
+import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.widget.LoginButton;
 import com.weibo.martn.weiboapp.R;
+import com.weibo.martn.weiboapp.sdk.AccessTokenKeeper;
+import com.weibo.martn.weiboapp.sdk.Constants;
+
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Administrator on 2015/5/6.
@@ -40,7 +52,7 @@ public class LoginActivity extends Activity{
         hintView.setMovementMethod(new ScrollingMovementMethod());
 
         // 创建微博实例
-        mWeiboAuth = new WeiboAuth(this, com.bpok.sina.sdk.Constants.APP_KEY,
+        mWeiboAuth = new AuthInfo(this, Constants.APP_KEY,
                 Constants.REDIRECT_URL, Constants.SCOPE);
 
         // 从 SharedPreferences 中读取上次已保存好 AccessToken 等信息，
@@ -51,11 +63,11 @@ public class LoginActivity extends Activity{
         }
 
         loginButton = (LoginButton) findViewById(R.id.btn_login);
-        loginButton.setOnClickListener(new OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                mSsoHandler = new SsoHandler(Login.this, mWeiboAuth);
+                mSsoHandler = new SsoHandler(LoginActivity.this, mWeiboAuth);
                 mSsoHandler.authorize(new AuthListener());
             }
         });
@@ -94,11 +106,11 @@ public class LoginActivity extends Activity{
                 updateTokenView(false);
 
                 // 保存 Token 到 SharedPreferences
-                AccessTokenKeeper.writeAccessToken(Login.this, mAccessToken);
-                Toast.makeText(Login.this,
+                AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
+                Toast.makeText(LoginActivity.this,
                         R.string.weibosdk_demo_toast_auth_success,
                         Toast.LENGTH_SHORT).show();
-                final Intent intent = new Intent(Login.this, Main.class);
+                final Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 finish();
@@ -113,20 +125,20 @@ public class LoginActivity extends Activity{
                 if (!TextUtils.isEmpty(code)) {
                     message = message + "\nObtained the code: " + code;
                 }
-                Toast.makeText(Login.this, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
             }
         }
 
         @Override
         public void onCancel() {
-            Toast.makeText(Login.this,
+            Toast.makeText(LoginActivity.this,
                     R.string.weibosdk_demo_toast_auth_canceled,
                     Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onWeiboException(WeiboException e) {
-            Toast.makeText(Login.this, "Auth exception : " + e.getMessage(),
+            Toast.makeText(LoginActivity.this, "Auth exception : " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -142,13 +154,13 @@ public class LoginActivity extends Activity{
         String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
                 .format(new java.util.Date(mAccessToken.getExpiresTime()));
         String format = getString(R.string.weibosdk_demo_token_to_string_format_1);
-        Log.i("Login.class",
+        Log.i("LoginActivity.class",
                 String.format(format, mAccessToken.getToken(), date));
         String message = String.format(format, mAccessToken.getToken(), date);
         if (hasExisted) {
             message = getString(R.string.weibosdk_demo_token_has_existed)
                     + "\n" + message;
         }
-        Log.i("Login.class", message);
+        Log.i("LoginActivity.class", message);
     }
 }

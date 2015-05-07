@@ -1,1 +1,3 @@
-include ':app'
+include ':app', 'slidingmenu'
+include ':weiboSDK'
+include ':slidingmenu'

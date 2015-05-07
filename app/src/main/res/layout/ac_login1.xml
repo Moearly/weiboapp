@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:facebook="http://schemas.android.com/apk/res-auto"
-    xmlns:weibo="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_bg"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -29,7 +27,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
-                    <com.weibo.martn.weiboapp.view.RoundedImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/ivUserPic"
                         android:background="@drawable/login_picture_background"
                         android:saveEnabled="true"
@@ -39,9 +38,9 @@
                         android:src="@drawable/login_picture"
                         android:scaleType="centerCrop"
                         android:adjustViewBounds="false"
-                        weibo:corner_radius="42.0dip"
-                        weibo:cover_border_width="1.0px"
-                        weibo:cover_border_color="#0d000000" />
+                        app:riv_corner_radius="42.0dip"
+                        app:riv_border_width="1.0px"
+                        app:riv_border_color="#0d000000" />
                 </FrameLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -178,25 +177,25 @@
                     android:text="@string/login_blocking"
                     android:layout_below="@id/bnLogin"
                     android:layout_alignParentRight="true" />
-                <ViewStub
-                    android:id="@+id/vsLoginHorizontal"
-                    android:layout="@layout/vw_switchuser_bottom"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="29.0dip"
-                    android:layout_marginRight="29.0dip"
-                    android:layout_alignParentBottom="true" />
+                <!--<ViewStub-->
+                    <!--android:id="@+id/vsLoginHorizontal"-->
+                    <!--android:layout="@layout/vw_switchuser_bottom"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="29.0dip"-->
+                    <!--android:layout_marginRight="29.0dip"-->
+                    <!--android:layout_alignParentBottom="true" />-->
             </RelativeLayout>
         </ScrollView>
-        <ViewStub
-            android:id="@+id/vsLogin"
-            android:layout="@layout/vw_switchuser_bottom"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="29.0dip"
-            android:layout_marginRight="29.0dip"
-            android:layout_marginBottom="17.0dip"
-            android:layout_alignParentBottom="true" />
+        <!--<ViewStub-->
+            <!--android:id="@+id/vsLogin"-->
+            <!--android:layout="@layout/vw_switchuser_bottom"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="29.0dip"-->
+            <!--android:layout_marginRight="29.0dip"-->
+            <!--android:layout_marginBottom="17.0dip"-->
+            <!--android:layout_alignParentBottom="true" />-->
     </RelativeLayout>
 
 </FrameLayout>

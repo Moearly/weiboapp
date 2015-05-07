@@ -25,4 +25,8 @@ dependencies {
     compile files('libs/weibosdkcore_v3.0.1.jar')
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile project(':weiboSDK')
+    compile 'com.makeramen:roundedimageview:2.0.1'
+    compile 'com.hannesdorfmann.smoothprogressbar:library:1.0.0'
+    compile files('libs/xUtils-2.6.14.jar')
+    compile project(':slidingmenu')
 }
