@@ -11,4 +11,5 @@
     <color name="bg_lighter_gray">#F5F5F5</color>
     <color name="holo_orange_light">#ffffbb33</color>
     <color name="bg_dark">#ff181a1d</color>
+    <color name="transparent_black">#aa000000</color>
 </resources>

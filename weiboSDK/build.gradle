@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
+    compile files('libs/weibosdkcore_v3.0.1.jar')
     compile files('libs/weibosdkcore.jar')
-    compile 'com.android.support:appcompat-v7:22.0.0'
 }

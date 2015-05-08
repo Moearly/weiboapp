@@ -1,15 +1,18 @@
 package com.weibo.martn.weiboapp.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.weibo.martn.weiboapp.R;
 import com.weibo.martn.weiboapp.app.ConfigManager;
+import com.weibo.martn.weiboapp.fragment.FragmentFloat;
 import com.weibo.martn.weiboapp.fragment.FragmentHome;
 import com.weibo.martn.weiboapp.fragment.FragmentMenu;
 
@@ -18,7 +21,7 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 public class MainActivity extends ActionBarActivity {
 
-    private Fragment mHome;
+    private Fragment mContent;
     //在头部用于显示信息的加载
     private SmoothProgressBar pb;
     //数据统一处理
@@ -40,10 +43,10 @@ public class MainActivity extends ActionBarActivity {
     private void initViews(Bundle savedInstanceState) {
         //获取homefragment
         if (savedInstanceState != null)
-            mHome = getSupportFragmentManager().getFragment(
+            mContent = getSupportFragmentManager().getFragment(
                     savedInstanceState, "mContent");
-        if (mHome == null)
-            mHome = new FragmentHome();
+        if (mContent == null)
+            mContent = new FragmentHome();
 
         // 设置主视图界面
         if (configManager.getThemeMod() == 1) {
@@ -54,9 +57,12 @@ public class MainActivity extends ActionBarActivity {
             setContentView(R.layout.activity_main);
         //绑定fragment显示位置
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, mHome).commit();
+                .replace(R.id.content_frame, mContent).commit();
 
         initSlidingMenu(savedInstanceState);
+        actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
         this.pb = (SmoothProgressBar) findViewById(R.id.pb_main);
     }
 
@@ -89,14 +95,14 @@ public class MainActivity extends ActionBarActivity {
         mContent = fragment;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment).commit();
-        getSlidingMenu().showContent();
+        sm.showContent();
 
     }
 
     /**
      * 显示用户信息窗口
      */
-    public void showUerFlost() {
+    public void showUserFlost() {
         if (infoFragment == null) {
             infoFragment = new FragmentFloat();
             getSupportFragmentManager()
@@ -113,7 +119,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void removeFloat() {
+    public void removeUserFloat() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.view_push_down_out,
@@ -133,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            toggle();
+            sm.toggle();
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -153,24 +159,25 @@ public class MainActivity extends ActionBarActivity {
         // 跳转
         if (id == R.id.menu_post) {
             final Intent intent = new Intent();
-            intent.setClass(Main.this, Post.class);
+            intent.setClass(MainActivity.this, PostActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.flip_horizontal_in,
                     R.anim.flip_horizontal_out);
             return true;
         }
         if (id == android.R.id.home) {
-            if (configManager.getThemeMod() == 0)
-                configManager.setThemeMod(1);
-            else {
-                configManager.setThemeMod(0);
-            }
-            // 切换主题
-            final Intent intent = new Intent();
-            intent.setClass(Main.this, Main.class);
-            startActivity(intent);
-            finish();
-            overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+            sm.toggle();
+//            if (configManager.getThemeMod() == 0)
+//                configManager.setThemeMod(1);
+//            else {
+//                configManager.setThemeMod(0);
+//            }
+//            // 切换主题
+//            final Intent intent = new Intent();
+//            intent.setClass(MainActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//            overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             return true;
         }
         return super.onOptionsItemSelected(item);

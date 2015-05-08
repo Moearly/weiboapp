@@ -6,4 +6,5 @@
     <dimen name="login_button">44.0dip</dimen>
     <dimen name="shadow_width">15.0dip</dimen>
     <dimen name="slidingmenu_offset">100.0dip</dimen>
+    <dimen name="edit_location_height">26.5dip</dimen>
 </resources>

@@ -18,6 +18,7 @@ package com.sina.weibo.sdk.openapi;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.net.AsyncWeiboRunner;
 import com.sina.weibo.sdk.net.RequestListener;
@@ -50,7 +51,7 @@ public abstract class AbsOpenAPI {
     /**
      * 构造函数，使用各个 API 接口提供的服务前必须先获取 Token。
      * 
-     * @param accesssToken 访问令牌
+     * @param
      */
     public AbsOpenAPI(Context context, String appKey, Oauth2AccessToken accessToken) {
         mContext = context;

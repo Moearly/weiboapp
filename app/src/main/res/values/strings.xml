@@ -12,4 +12,6 @@
     <string name="weibosdk_demo_toast_auth_canceled">取消授权</string>
     <string name="weibosdk_demo_token_to_string_format_1">Token：%1$s \\n有效期：%2$s</string>
     <string name="weibosdk_demo_token_has_existed">Token 仍在有效期内，无需再次登录。</string>
+    <string name="user_info_closefriend">密友</string>
+    <string name="new_blog_to_all">公开</string>
 </resources>
