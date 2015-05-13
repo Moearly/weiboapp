@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center|right"
+    android:orientation="horizontal"
+    android:id="@+id/ib_meyou_ll"
+    android:clickable="true"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/edit_location_height"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:contentDescription="@string/user_info_closefriend"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/ib_meyou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8.0dip"
+        android:src="@drawable/compose_publicbutton" />
+    <TextView
+        android:textSize="14.0sp"
+        android:ellipsize="end"
+        android:gravity="center|left"
+        android:id="@+id/ib_meyou_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8.0dip"
+        android:maxWidth="140.0dip"
+        android:text="@string/new_blog_to_all"
+        android:singleLine="true"
+        android:maxLength="24" />
+</LinearLayout>

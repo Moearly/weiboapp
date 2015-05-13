@@ -1,11 +1,51 @@
 package com.weibo.martn.weiboapp.fragment;
 
-import android.support.v4.app.Fragment;
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.StatusesAPI;
+import com.sina.weibo.sdk.openapi.models.ErrorInfo;
+import com.sina.weibo.sdk.openapi.models.Status;
+import com.sina.weibo.sdk.openapi.models.StatusList;
+import com.sina.weibo.sdk.utils.LogUtil;
+import com.weibo.martn.weiboapp.R;
+import com.weibo.martn.weiboapp.adapter.HomeListAdapter;
+import com.weibo.martn.weiboapp.adapter.NaviAdapter;
+import com.weibo.martn.weiboapp.app.ConfigManager;
+import com.weibo.martn.weiboapp.bean.MenuModle;
+import com.weibo.martn.weiboapp.sdk.AccessTokenKeeper;
+import com.weibo.martn.weiboapp.sdk.Constants;
+import com.weibo.martn.weiboapp.utils.TextFileReader;
+import com.weibo.martn.weiboapp.utils.ToastUtils;
+import com.weibo.martn.weiboapp.view.UpDownRefershListView;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/7.
  */
-public class FragmentHome extends Fragment {
+public class FragmentHome extends FragmentBase implements ActionBar.OnNavigationListener{
     /** 当前 Token 信息 */
     private Oauth2AccessToken mAccessToken;
     /** 用于获取微博信息流等操作的API */
@@ -24,7 +64,7 @@ public class FragmentHome extends Fragment {
     // handler
     private Handler handler = new Handler();
 
-    // refersh listener
+    // refersh listener 下拉刷新的监听器
     private MyRefreshListener refreshListener;
 
     // 当前标示id
@@ -39,7 +79,7 @@ public class FragmentHome extends Fragment {
     public StatusList allList;
 
     // impl
-    private RequestRefershImpl requestRefershImpl;
+    private UpDownRefershListView.RequestRefershImpl requestRefershImpl;
 
     private String TAG = FragmentHome.class.getName();
     protected static final String STATE_PAUSE_ON_SCROLL = "STATE_PAUSE_ON_SCROLL";
@@ -59,7 +99,7 @@ public class FragmentHome extends Fragment {
             switch (msg.what) {
                 case 0:
                     initApi();
-                    findViews();
+                    initViews();
                     new GetAllStatusAsyncTask().execute();
                     getAllListDataFrmFile("all_response.json");
                     break;
@@ -98,11 +138,11 @@ public class FragmentHome extends Fragment {
         else {
             mRootView = inflater.inflate(R.layout.fragment_home_night, null);
         }
-        // 等待一秒再去加载费事的操作，否则进入该fragment菜单滑动卡顿
+        // 等待2秒再去加载费事的操作，否则进入该fragment菜单滑动卡顿
         readyHandler.sendEmptyMessageDelayed(0, 2000);
         initActionBar(inflater);
         // activity需要实现相关接口
-        this.requestRefershImpl = (RequestRefershImpl) getActivity();
+        this.requestRefershImpl = (UpDownRefershListView.RequestRefershImpl) getActivity();
         return mRootView;
     }
 
@@ -115,11 +155,11 @@ public class FragmentHome extends Fragment {
         if (configManager.getThemeMod() == 0) {
             actionBar.setBackgroundDrawable(getResources().getDrawable(
                     R.color.white));
-            actionBar.setIcon(R.drawable.hpz);
+            actionBar.setIcon(R.drawable.ic_bt_night);
         } else {
             actionBar.setBackgroundDrawable(getResources().getDrawable(
                     R.color.bg_dark_tab));
-            actionBar.setIcon(R.drawable.hqa);
+                actionBar.setIcon(R.drawable.ic_bt_day);
         }
 
         // actionBar.setDisplayHomeAsUpEnabled(true);
@@ -129,19 +169,19 @@ public class FragmentHome extends Fragment {
         List<MenuModle> menuList = new ArrayList<MenuModle>();
         MenuModle item_1 = new MenuModle();
         item_1.setTitle("全部");
-        item_1.setIcon_sel(R.drawable.ffo);
+        item_1.setIcon_sel(R.drawable.ic_menu_all);
         MenuModle item_2 = new MenuModle();
         item_2.setTitle("原创");
-        item_2.setIcon_sel(R.drawable.ffm);
+        item_2.setIcon_sel(R.drawable.ic_menu_nature);
         MenuModle item_3 = new MenuModle();
         item_3.setTitle("图片");
-        item_3.setIcon_sel(R.drawable.grg);
+        item_3.setIcon_sel(R.drawable.ic_menu_pic);
         MenuModle item_4 = new MenuModle();
         item_4.setTitle("视频");
-        item_4.setIcon_sel(R.drawable.grb);
+        item_4.setIcon_sel(R.drawable.ic_menu_video);
         MenuModle item_5 = new MenuModle();
         item_5.setTitle("音乐");
-        item_5.setIcon_sel(R.drawable.gri);
+        item_5.setIcon_sel(R.drawable.ic_menu_music);
         menuList.add(item_1);
         menuList.add(item_2);
         menuList.add(item_3);
@@ -151,7 +191,7 @@ public class FragmentHome extends Fragment {
                 getActivity()), this);
     }
 
-    private void findViews() {
+    private void initViews() {
         mListView = (UpDownRefershListView) mRootView
                 .findViewById(R.id.lv_home);
         refreshListener = new MyRefreshListener();
@@ -165,7 +205,7 @@ public class FragmentHome extends Fragment {
         // 获取当前已保存过的 Token
         mAccessToken = AccessTokenKeeper.readAccessToken(mContext);
         // 对statusAPI实例化
-        mStatusesAPI = new StatusesAPI(mAccessToken);
+        mStatusesAPI = new StatusesAPI(getActivity(), Constants.SINA_APP_KEY,mAccessToken);
     }
 
     /**
@@ -201,7 +241,7 @@ public class FragmentHome extends Fragment {
                 if (swingBottomInAnimationAdapter == null)
                     swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(
                             mHomeListAdapter);
-                swingBottomInAnimationAdapter.setListView(mListView);
+                swingBottomInAnimationAdapter.setAbsListView(mListView);
                 // nullPointer happens.....
                 if (mListView == null) {
                     mListView = (UpDownRefershListView) mRootView
@@ -246,8 +286,8 @@ public class FragmentHome extends Fragment {
     }
 
     /**
-     * @param statusList
-     *            add the list content -------->>>foot
+     *
+     * des：add the list content -------->>>foot
      */
     private void extendsStatus() {
         // 如果用户获取到的状态条数过少会触发异常,暂时先捕获，有时间在研究
@@ -271,6 +311,7 @@ public class FragmentHome extends Fragment {
     }
 
     /**
+     * 缓存string数据到文件
      * @param response
      * @param FILE_NAME
      */
@@ -361,7 +402,10 @@ public class FragmentHome extends Fragment {
         }
     };
 
-    private class MyRefreshListener implements RefreshListener {
+    /**
+     * 实现对下拉刷新事件过程中的处理，以及完成后的处理
+     */
+    private class MyRefreshListener implements UpDownRefershListView.RefreshListener {
         // 处理下拉刷新
         @Override
         public void pullDownRefresh() {

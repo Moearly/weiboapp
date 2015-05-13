@@ -19,6 +19,5 @@ android {
 }
 
 dependencies {
-    compile files('libs/weibosdkcore_v3.0.1.jar')
     compile files('libs/weibosdkcore.jar')
 }
