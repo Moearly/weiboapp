@@ -1,35 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_main_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/bg_lighter_gray"
-    android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="2dp" >
-
-        <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
-            android:id="@+id/pb_main"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:indeterminate="true"
-            app:spb_color="@color/holo_orange_light" >
-        </fr.castorflex.android.smoothprogressbar.SmoothProgressBar>
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/content_frame"
+    android:background="@color/bg_lighter_gray">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <FrameLayout
-            android:id="@+id/content_frame_float"
+        android:orientation="vertical" >
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            >
-        </FrameLayout>
-    </FrameLayout>
+            android:layout_height="2dp" >
 
-</LinearLayout>
+            <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/pb_main"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:indeterminate="true"
+                app:spb_color="@color/holo_orange_light" >
+            </fr.castorflex.android.smoothprogressbar.SmoothProgressBar>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+                <FrameLayout
+                    android:id="@+id/content_frame_float"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    >
+                </FrameLayout>
+            </FrameLayout>
+            <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dip" >
+
+                    <com.weibo.martn.weiboapp.widget.MyFragmentTabHost
+                        android:id="@android:id/tabhost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dip" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#D6D6D6" />
+                </RelativeLayout>
+
+            <!-- 快速操作按钮 -->
+
+                <ImageView
+                    android:id="@+id/iv_quick_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/btn_quickoption_selector" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <fragment
+        android:id="@+id/navigation_drawer"
+        android:name="com.weibo.martn.weiboapp.fragment.NavigationDrawerFragment"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        />
+
+</android.support.v4.widget.DrawerLayout >

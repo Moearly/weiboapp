@@ -86,6 +86,10 @@ public class SplashActivity extends Activity{
         SplashActivity.this.finish();
     }
 
+    /**
+     * 初始化图片加载器
+     * @param context
+     */
     public static void initImageLoader(Context context) {
         // This configuration tuning is custom. You can tune every option, you
         // may tune some of them,

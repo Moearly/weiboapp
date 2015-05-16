@@ -7,4 +7,13 @@
     <dimen name="shadow_width">15.0dip</dimen>
     <dimen name="slidingmenu_offset">100.0dip</dimen>
     <dimen name="edit_location_height">26.5dip</dimen>
+    <dimen name="navigation_drawer_width">240.0dip</dimen>
+    <dimen name="space_8">8.0dip</dimen>
+    <dimen name="horizontal_margin">16.0dip</dimen>
+    <dimen name="global_dialog_padding">15.0dip</dimen>
+    <dimen name="dialog_margin">7.0dip</dimen>
+    <dimen name="text_regular_primary_size">14.0dip</dimen>
+    <dimen name="text_large_primary_size">16.0dip</dimen>
+    <dimen name="text_large_secondary_size">12.0dip</dimen>
+    <dimen name="global_padding">8.0dip</dimen>
 </resources>

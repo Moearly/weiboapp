@@ -14,4 +14,7 @@
     <string name="weibosdk_demo_token_has_existed">Token 仍在有效期内，无需再次登录。</string>
     <string name="user_info_closefriend">密友</string>
     <string name="new_blog_to_all">公开</string>
+    <string name="tip_double_click_exit">再次点击就退出咯！</string>
+    <string name="copy_success">复制成功</string>
+    <string name="loading">加载中…</string>
 </resources>

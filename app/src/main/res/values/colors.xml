@@ -11,6 +11,10 @@
     <color name="bg_lighter_gray">#F5F5F5</color>
     <color name="bg_dark">#ff181a1d</color>
     <color name="transparent_black">#aa000000</color>
+    <color name="text_dark">#af000000</color>
+    <color name="white40">#40FFFFFF</color>
+    <color name="ui_dialog_divider">#DADADA</color>
+    <color name="list_divider_color">#DADADA</color>
 
     <color name="material_light_blue_500">#03a9f4</color>
 
@@ -39,5 +43,12 @@
     <color name="holo_gray_bright">#33CCCCCC</color>
     <color name="bg_dark_tab">#ff0b1b1c</color>
     <color name="light_blue">#1874CD</color>
+    <color name="bg_touch">@color/lightest_gray</color>
+    <color name="lightest_gray">#0a000000</color>
+    <color name="black">#000000</color>
+    <color name="text_light">#3f000000</color>
+    <color name="light_gray">#1a000000</color>
+    <color name="list_item_background_pressed">#efefef</color>
+    <color name="list_item_background_normal">@color/white</color>
 
 </resources>

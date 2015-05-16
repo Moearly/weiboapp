@@ -11,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.lidroid.xutils.ViewUtils;
 import com.weibo.martn.weiboapp.R;
+import com.weibo.martn.weiboapp.app.AppManager;
 import com.weibo.martn.weiboapp.app.ConfigManager;
 import com.weibo.martn.weiboapp.fragment.FragmentFloat;
 import com.weibo.martn.weiboapp.fragment.FragmentHome;
@@ -57,6 +59,9 @@ public class MainActivity extends FragmentActivity implements UpDownRefershListV
             setContentView(R.layout.activity_main_night);
         } else
             setContentView(R.layout.activity_main);
+        ViewUtils.inject(this);
+        AppManager.getAppManager().addActivity(this);
+
         //绑定fragment显示位置
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mContent).commit();
