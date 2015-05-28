@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 /**
  * Created by Administrator on 2015/5/7.
- * des: 通过sp获取界面显示数据
+ * des: 通过sp获取界面显示数据---简单处理配置信息
  */
 public class ConfigManager {
 

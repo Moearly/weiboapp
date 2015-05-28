@@ -16,7 +16,7 @@ import android.util.AttributeSet;
 public class MyFragmentTabHost extends FragmentTabHost {
     //当前的标记
     private String mCurrentTag;
-    //没有tab变化的标记
+    //不会有变化的tab
     private String mNoTabChangedTag;
 
     public MyFragmentTabHost(Context context, AttributeSet attrs) {

@@ -16,4 +16,15 @@
     <dimen name="text_large_primary_size">16.0dip</dimen>
     <dimen name="text_large_secondary_size">12.0dip</dimen>
     <dimen name="global_padding">8.0dip</dimen>
+    <dimen name="text_size_16">16.0dip</dimen>
+    <dimen name="space_10">10.0dip</dimen>
+    <dimen name="text_size_14">14.0dip</dimen>
+    <dimen name="user_photo_menu">40dip</dimen>
+    <dimen name="lefticon_size">48.0dip</dimen>
+    <dimen name="insert_left_text_with_icon">72.0dip</dimen>
+    <dimen name="textsize_primary">16sp</dimen>
+    <dimen name="textsize_secondary">14sp</dimen>
+    <dimen name="righticon_padding">16.0dip</dimen>
+    <dimen name="righticon_size">22.0dip</dimen>
+
 </resources>

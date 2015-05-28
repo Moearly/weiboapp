@@ -38,7 +38,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.weibo.martn.weiboapp.R;
 import com.weibo.martn.weiboapp.app.AppContext;
-import com.weibo.martn.weiboapp.app.BaseApplication;
+import com.weibo.martn.weiboapp.app.base.BaseApplication;
 
 /**
  * 设备信息获取
@@ -316,13 +316,13 @@ public class TDevice {
     public static void showSoftKeyboard(View view) {
 	((InputMethodManager) BaseApplication.context().getSystemService(
 		Context.INPUT_METHOD_SERVICE)).showSoftInput(view,
-		InputMethodManager.SHOW_FORCED);
+			InputMethodManager.SHOW_FORCED);
     }
 
     public static void toogleSoftKeyboard(View view) {
 	((InputMethodManager) BaseApplication.context().getSystemService(
 		Context.INPUT_METHOD_SERVICE)).toggleSoftInput(0,
-		InputMethodManager.HIDE_NOT_ALWAYS);
+			InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     public static boolean isSdcardReady() {
@@ -421,7 +421,7 @@ public class TDevice {
 	params.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	activity.getWindow().setAttributes(params);
 	activity.getWindow().clearFlags(
-		WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+			WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 
     public static PackageInfo getPackageInfo(String pckName) {
@@ -495,7 +495,7 @@ public class TDevice {
 	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	intent.setAction(Intent.ACTION_VIEW);
 	intent.setDataAndType(Uri.fromFile(file),
-		"application/vnd.android.package-archive");
+			"application/vnd.android.package-archive");
 	return intent;
     }
 
@@ -702,7 +702,7 @@ public class TDevice {
     public static int getNetworkType() {
 	int netType = 0;
 	ConnectivityManager connectivityManager = (ConnectivityManager) AppContext
-		.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+		.context().getSystemService(Context.CONNECTIVITY_SERVICE);
 	NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 	if (networkInfo == null) {
 	    return netType;
@@ -722,4 +722,15 @@ public class TDevice {
 	}
 	return netType;
     }
+
+	public static int getPageSize() {
+		if (_pageSize == -1)
+			if (TDevice.isTablet())
+				_pageSize = 20;
+			else if (TDevice.hasBigScreen())
+				_pageSize = 20;
+			else
+				_pageSize = 20;
+		return _pageSize;
+	}
 }

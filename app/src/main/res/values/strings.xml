@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">weiboapp</string>
 
+    <string name="draw_open">打开</string>
+    <string name="draw_close">关闭</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="login_account_name_tips">邮箱/手机号</string>
@@ -17,4 +20,61 @@
     <string name="tip_double_click_exit">再次点击就退出咯！</string>
     <string name="copy_success">复制成功</string>
     <string name="loading">加载中…</string>
+    <string name="main_tab_name_home">首页</string>
+    <string name="main_tab_name_tweet">消息</string>
+    <string name="main_tab_name_quick">快速</string>
+    <string name="main_tab_name_explore">发现</string>
+    <string name="main_tab_name_my">个人</string>
+    <string name="menu_setting">设置</string>
+    <string name="menu_exit">退出</string>
+    <string name="account_username_hint">邮箱/手机号</string>
+    <string name="account_pwd_hint">密码</string>
+    <string name="account_remind">Aisen是个人开源项目，记录账号信息仅用于方便您多次网页授权，且在卸载Aisen时自动清除\\n\\n友情提示，如果遇到验证码，请先刷新再输入验证码通过概率高一点，目前还没有优化这个问题！\\n\\n如有疑问，请联系我 : wangd.info@gmail.com</string>
+    <string name="title_login">用户授权</string>
+    <string name="account_load_auth">正在完成授权，请稍等</string>
+    <string name="account_login">开始授权</string>
+    <string name="account_invalid_input">用户名或者密码不能为空</string>
+    <string name="account_get_html_faild">网络异常，请稍后重试</string>
+    <string name="account_empty">没有授权账号</string>
+    <string name="account_add">添加账号</string>
+    <string name="data_has_new">数据已经是最新的了</string>
+
+    <!--菜单管理-->
+    <string name="menu_add_account">添加账号</string>
+
+    <!-- 公共 -->
+    <string name="copy">复制</string>
+    <string name="repost">转发</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="bu">否</string>
+    <string name="remind">提示</string>
+    <string name="update">更新</string>
+    <string name="add">添加</string>
+    <string name="i_know">我知道了</string>
+    <string name="donnot_remind">不再提示</string>
+    <string name="next_time_remind">下次再说</string>
+    <string name="none_opts_selected">没有选中项</string>
+    <string name="opts_select_remind">选中%d项</string>
+    <string name="delete_success">删除成功</string>
+    <string name="delete_faild">删除失败</string>
+    <string name="update_success">更新成功</string>
+    <string name="update_faild">更新失败</string>
+    <string name="processing">正在处理</string>
+    <string name="to_browser">浏览器打开</string>
+    <string name="please_wait">请稍等</string>
+
+    <!--账户管理-->
+    <string name="title_acount">账号管理</string>
+    <string name="account_newaccount_remind">请注意，根据新浪微博的平台政策，刚添加的帐号会在 %s 天后过期，到时需要重新登录</string>
+    <string name="str_loding">数据正在加载</string>
+    <string name="str_no_more">没有更多数据可以加载了</string>
+    <string name="account_relogin_remind">授权过期了，请重新登录授权</string>
+    <string name="account_expired">这个账号授权过期了，是否重新授权</string>
+    <string name="account_destory_account_remind">确定删除选中的账号吗？</string>
+    <string name="account_delete_account_loading">正在删除账号</string>
+    <string name="account_load_userinfo">正在加载用户信息</string>
+    <string name="account_load_groups">正在加载分组信息</string>
 </resources>

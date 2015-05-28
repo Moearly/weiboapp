@@ -27,8 +27,8 @@ import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.weibo.martn.weiboapp.R;
 import com.weibo.martn.weiboapp.app.ConfigManager;
-import com.weibo.martn.weiboapp.fragment.FragmentBase;
-import com.weibo.martn.weiboapp.ui.activity.ImageViewerActivity;
+import com.weibo.martn.weiboapp.ui.base.ImageViewerActivity;
+import com.weibo.martn.weiboapp.base.BaseFragment;
 import com.weibo.martn.weiboapp.view.ViewHolderHomeList;
 
 public class HomeListAdapter extends BaseAdapter {
@@ -45,9 +45,9 @@ public class HomeListAdapter extends BaseAdapter {
 	private DisplayImageOptions options_avatar;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	private ConfigManager configManager;
-	private FragmentBase mFragment;
+	private BaseFragment mFragment;
 
-	public HomeListAdapter(FragmentBase fragmentBase, StatusList statuses,
+	public HomeListAdapter(BaseFragment fragmentBase, StatusList statuses,
 			Context context) {
 		super();
 		this.mContext = context;

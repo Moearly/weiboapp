@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_main_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -23,55 +22,34 @@
             </fr.castorflex.android.smoothprogressbar.SmoothProgressBar>
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+
             <FrameLayout
-            android:id="@+id/content_frame"
+            android:id="@+id/fl_draw_root"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
                 <FrameLayout
-                    android:id="@+id/content_frame_float"
+                    android:id="@+id/content_frame"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    >
+                    android:layout_height="match_parent"
+                    />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/abc_action_bar_default_height_material">
+
+                    <include
+                        layout="@layout/comm_lay_toolbar" android:layout_width="match_parent"
+                        android:layout_height="@dimen/abc_action_bar_default_height_material"/>
+
                 </FrameLayout>
-            </FrameLayout>
-            <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white" >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dip" >
-
-                    <com.weibo.martn.weiboapp.widget.MyFragmentTabHost
-                        android:id="@android:id/tabhost"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dip" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:background="#D6D6D6" />
-                </RelativeLayout>
-
-            <!-- 快速操作按钮 -->
-
-                <ImageView
-                    android:id="@+id/iv_quick_option"
+                <com.melnykov.fab.FloatingActionButton
+                    android:id="@+id/fab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/btn_quickoption_selector" />
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_menu_edit_white"/>
             </FrameLayout>
-        </LinearLayout>
     </LinearLayout>
     <fragment
         android:id="@+id/navigation_drawer"
