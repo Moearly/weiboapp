@@ -1,14 +1,8 @@
-/**
- * Title: AppManager
- * Package: com.weibo.martn.weiboapp.app
- * Description: (对activity的统一管理---堆栈式管理)
- * Date 2015/5/14 23:03
- *
- * @author MartnLei MartnLei_163_com
- * @version V1.0
- */
 package com.weibo.martn.weiboapp.app;
 
+/**
+ * Created by Administrator on 2015/6/16.
+ */
 import java.util.Stack;
 
 import android.app.Activity;
@@ -96,7 +90,7 @@ public class AppManager {
 
     /**
      * 获取指定的Activity
-     * 
+     *
      * @author kymjs
      */
     public static Activity getActivity(Class<?> cls) {

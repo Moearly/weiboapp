@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/5/7.
+ * Created by MartnLei on 2015/5/7.
  */
 public class FragmentHome extends FragmentBase implements ActionBar.OnNavigationListener{
     /** 当前 Token 信息 */
@@ -162,7 +162,7 @@ public class FragmentHome extends FragmentBase implements ActionBar.OnNavigation
                 actionBar.setIcon(R.drawable.ic_bt_day);
         }
 
-        // actionBar.setDisplayHomeAsUpEnabled(true);
+         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         /** 过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐 */
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

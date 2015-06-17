@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
@@ -20,6 +23,10 @@ import com.weibo.martn.weiboapp.fragment.FragmentHome;
 import com.weibo.martn.weiboapp.fragment.FragmentMenu;
 import com.weibo.martn.weiboapp.view.UpDownRefershListView;
 
+import java.lang.reflect.Field;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
@@ -27,15 +34,19 @@ public class MainActivity extends FragmentActivity implements UpDownRefershListV
 
     private Fragment mContent;
     //在头部用于显示信息的加载
-    private SmoothProgressBar pb;
     //数据统一处理，本地化
     private ConfigManager configManager;
     // 展示用户信息的窗口
     private Fragment infoFragment;
     // actionbar初始化
      private static ActionBar actionBar;
-    //slidingmenu
-    private SlidingMenu sm;
+
+    @InjectView(R.id.drawer_main_layout)
+    DrawerLayout mDrawerLayout;
+
+    @InjectView(R.id.pb_main)
+    SmoothProgressBar pb;
+
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -59,42 +70,32 @@ public class MainActivity extends FragmentActivity implements UpDownRefershListV
             setContentView(R.layout.activity_main_night);
         } else
             setContentView(R.layout.activity_main);
-        ViewUtils.inject(this);
+
+        ButterKnife.inject(this);
         AppManager.getAppManager().addActivity(this);
 
         //绑定fragment显示位置
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mContent).commit();
 
-        initSlidingMenu(savedInstanceState);
+
+        // 如果设备有实体MENU按键，overflow菜单不会再显示
+        ViewConfiguration viewConfiguration = ViewConfiguration.get(this);
+        if (viewConfiguration.hasPermanentMenuKey()) {
+            try {
+                Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(viewConfiguration, false);
+            } catch (Exception e) {
+            }
+        }
 
         actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-        this.pb = (SmoothProgressBar) findViewById(R.id.pb_main);
     }
 
-    /**
-     * 初始化滑动菜单
-     */
-    private void initSlidingMenu(Bundle savedInstanceState) {
 
-//        创建一个slidingmenu
-        sm = new SlidingMenu(this);
-        sm.setShadowWidthRes(R.dimen.shadow_width);
-        sm.setShadowDrawable(R.drawable.shadow);
-        sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-        sm.setFadeDegree(0.35f);
-        sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        sm.setMode(SlidingMenu.LEFT);
-        sm.setMenu(R.layout.menu_frame);
-        sm.attachToActivity(this, SlidingMenu.SLIDING_WINDOW);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // 设置滑动菜单视图界面
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.menu_frame, new FragmentMenu()).commit();
-    }
 
     /**
      * 切换Fragment，也是切换视图的内容
@@ -103,12 +104,12 @@ public class MainActivity extends FragmentActivity implements UpDownRefershListV
         mContent = fragment;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, fragment).commit();
-        sm.showContent();
+        mDrawerLayout.closeDrawers();
 
     }
 
     /**
-     * 显示用户信息窗口
+     * 显示用户信息窗口---广告
      */
     public void showUserFlost() {
         if (infoFragment == null) {
@@ -147,7 +148,10 @@ public class MainActivity extends FragmentActivity implements UpDownRefershListV
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            sm.toggle();
+            if (mDrawerLayout.isDrawerVisible(GravityCompat.START))
+                mDrawerLayout.closeDrawers();
+            else
+                mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -174,7 +178,10 @@ public class MainActivity extends FragmentActivity implements UpDownRefershListV
             return true;
         }
         if (id == android.R.id.home) {
-            sm.toggle();
+            if (mDrawerLayout.isDrawerVisible(GravityCompat.START))
+                mDrawerLayout.closeDrawers();
+            else
+                mDrawerLayout.openDrawer(GravityCompat.START);
 //            if (configManager.getThemeMod() == 0)
 //                configManager.setThemeMod(1);
 //            else {

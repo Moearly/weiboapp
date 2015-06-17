@@ -110,7 +110,7 @@
 
     <style name="list_cell_text_dialog" parent="@style/list_cell_text">
         <item name="android:textSize">16.0dip</item>
-        <item name="android:textColor">@color/ui_dialog_list_text</item>
+        <item name="android:textColor">@color/text_dark</item>
     </style>
 
 

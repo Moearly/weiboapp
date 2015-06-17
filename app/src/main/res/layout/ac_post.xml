@@ -6,7 +6,6 @@
     android:background="@color/white"
     tools:context="com.weibo.martn.weiboapp.ui.activity.PostActivity"
     tools:ignore="MergeRootFrame" >
-
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"

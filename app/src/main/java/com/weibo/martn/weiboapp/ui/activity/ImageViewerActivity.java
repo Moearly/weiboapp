@@ -79,6 +79,7 @@ public class ImageViewerActivity extends Activity implements ImageDownloader.Ima
                 R.color.white));
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.custom_action_bar_viewer);
         this.iv_back = (ImageView) findViewById(R.id.iv_action_back);
         progressBar = (ProgressBar) findViewById(R.id.pb_action_circle);

@@ -163,7 +163,7 @@ public class UpDownRefershListView extends ListView {
 		state = DONE;
 		onHeaderStateChange();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		headerLastUpdated.setText("最后刷新时间：" + sdf.format(new Date()));
+		headerLastUpdated.setText(sdf.format(new Date()));
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class UpDownRefershListView extends ListView {
 		state = DONE;
 		onFooterStateChange();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		footerLastUpdated.setText("最后刷新时间：" + sdf.format(new Date()));
+		footerLastUpdated.setText(sdf.format(new Date()));
 
 	}
 

@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dip"
         android:background="@color/white" >
 
         <FrameLayout
@@ -25,32 +25,34 @@
             <ProgressBar
                 android:id="@+id/progerssbar"
                 style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dip"
+                android:layout_height="30dip"
                 android:layout_gravity="center_vertical"
                 android:visibility="gone" />
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_centerHorizontal="true"
             android:orientation="vertical" >
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="下拉刷新"
-                 android:textSize="10sp" 
+                 android:textSize="12sp"
                 android:textColor="@color/lighter_gray" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/updated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:gravity="center"
                 android:text="下拉刷新"
                 android:textColor="@color/lighter_gray"
                 android:textSize="10sp" />

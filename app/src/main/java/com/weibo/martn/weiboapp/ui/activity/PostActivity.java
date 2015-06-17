@@ -1,13 +1,13 @@
 package com.weibo.martn.weiboapp.ui.activity;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +31,7 @@ import java.io.File;
 /**
  * Created by Administrator on 2015/5/8.
  */
-public class PostActivity extends ActionBarActivity {
+public class PostActivity extends Activity {
     private ImageView iv_pic, iv_send, iv_gally;
     private ProgressBar pBar;
     //用户写入的博文
@@ -75,8 +75,10 @@ public class PostActivity extends ActionBarActivity {
         ActionBar actionBar = getActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(
                 R.color.white));
+
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         actionBar.setCustomView(R.layout.custom_action_bar_post);
         this.pBar = (ProgressBar) findViewById(R.id.pb_action_circle);
         this.iv_pic = (ImageView) findViewById(R.id.iv_action_camera);
